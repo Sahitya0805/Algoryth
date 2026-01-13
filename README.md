@@ -116,7 +116,123 @@ Algoryth/
 └── README.md
 ```
 
-## 🎨 Theme System
+## 📂 Frontend Folder Structure Guide
+
+This guide explains the purpose of each folder and key files in the `src/` directory to help new contributors understand the codebase organization.
+
+### 📱 `src/app/` - Next.js App Router
+
+The `app/` directory uses Next.js 16's App Router architecture, where folders define routes and special files define UI.
+
+#### Key Directories
+
+- **`api/`** - API route handlers for server-side logic
+  - `health/` - Health check endpoint
+  - `problems/` - Problems data API endpoints
+  - Other API routes for data fetching and mutations
+
+- **`problems/`** - Problem browsing and solving pages
+  - `page.jsx` - Problems list page with filtering and search
+  - `[slug]/` - Dynamic route for individual problem detail pages
+
+- **`dashboard/`** - User dashboard showing statistics and activity
+  - Displays problems solved, difficulty breakdown, and recent submissions
+
+- **`auth/` & `signup/`** - Authentication and user registration pages
+
+- **`bookmarks/`** - Saved/bookmarked problems for quick access
+
+- **`submissions/`** - User's code submission history
+
+- **`contests/`** - Contest information and participation
+
+- **`rating/`** - User rating and ranking system
+
+- **`topics/`** - Browse problems by topic/category
+
+- **`settings/`** - User preferences and account settings
+
+- **`privacy/` & `terms/`** - Legal and policy pages
+
+#### Special Files
+
+- **`layout.jsx`** - Root layout component that wraps all pages
+  - Includes `Navbar`, `Footer`, and theme provider
+  - Applies global fonts (Geist Sans & Mono)
+
+- **`page.jsx`** - Home page component
+  - Landing page with problem recommendations and quick stats
+
+- **`globals.css`** - Global styles and CSS custom properties
+  - Theme configuration (light/dark mode)
+  - Tailwind CSS imports and custom variants
+
+### 🧩 `src/components/` - Reusable UI Components
+
+All reusable React components that are used across multiple pages.
+
+#### Layout Components
+- **`Navbar.jsx`** - Top navigation bar with links, search, and theme toggle
+- **`Footer.jsx`** - Footer with links and copyright information
+
+#### Problem-Solving Components
+- **`CodeEditor.jsx`** - Monaco editor wrapper with syntax highlighting
+  - Supports multiple languages (JavaScript, TypeScript, C++, Python)
+  - Theme syncs with app theme (light/dark)
+  
+- **`ProblemWorkspace.jsx`** - Main problem-solving interface
+  - Combines problem description, code editor, and test cases
+  - Handles code execution and submission
+
+- **`ProblemCard.jsx`** - Individual problem card in the problems list
+  - Displays title, difficulty, tags, and actions (bookmark, add to top)
+
+- **`SplitPane.jsx`** - Resizable split pane component
+  - Used to create adjustable layouts in the problem workspace
+
+#### UI Utility Components
+- **`ThemeToggle.jsx`** - Dark/light mode toggle button
+  - Persists theme preference to localStorage
+
+- **`AuthButton.jsx`** - Authentication button (login/logout)
+
+- **`DashboardStats.jsx`** - User statistics display component
+  - Shows problems solved by difficulty, preferred languages
+
+- **`ProblemNavigator.jsx`** - Navigation between problems
+
+- **`ProblemTimer.jsx`** - Timer for tracking problem-solving time
+
+- **`ToastNotification.jsx`** - Toast notifications for user feedback
+
+### 🛠️ `src/lib/` - Utilities and Helpers
+
+Utility functions, data, and helper modules.
+
+- **`problems.js`** - Problem data and helper functions
+  - Contains problem definitions, test cases, and solutions
+  - Helper functions for filtering, searching, and sorting problems
+
+- **`db/`** - Database connection and models
+  - `connect.js` - MongoDB/database connection logic
+  - `middleware.js` - Database middleware for request handling
+  - `models/` - Data models (User, Submission, etc.)
+
+### 🎨 Global Styles and Theme Configuration
+
+#### `src/app/globals.css`
+
+This file contains:
+- **Tailwind CSS imports** - Base Tailwind styles
+- **CSS Custom Properties** - Theme color variables
+  - `--background` - Background color (changes with theme)
+  - `--foreground` - Text color (changes with theme)
+- **Theme Definitions**
+  - Light mode: Warm cream background (`#f8f3e6`)
+  - Dark mode: Deep purple-black background (`#18131f`)
+- **Custom Variants** - Tailwind dark mode variant configuration
+
+#### Theme System
 
 Algoryth features a sophisticated theme system:
 
